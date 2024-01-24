@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddSubject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="subject" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddSubjectResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubjects">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubjectsResult" type="tns:ArrayOfSubjectInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSubjectInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SubjectInfo" nillable="true" type="tns:SubjectInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SubjectInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SubjectId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubjectName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddQuestion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="question" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="subject" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddQuestionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddQuestionResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAnswer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="answer" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAnswerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RightAnswerSubmited">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RightAnswerSubmitedResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="WrongAnswerSubmited">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WrongAnswerSubmitedResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AnswerShown">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="answerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AnswerShownResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRandomQuestion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRandomQuestionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRandomQuestionResult" type="tns:Question" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Question">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuestionText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountAsked" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountRight" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LevelKnown" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RightAnswer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RightAnswerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RightAnswerResult" type="tns:RightAnswerInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RightAnswerInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AnswerId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AnswerText" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRandomWrongAnswers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRandomWrongAnswersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRandomWrongAnswersResult" type="tns:WrongAnswersInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WrongAnswersInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WrongAnswerId1" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WrongAnswerText1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WrongAnswerId2" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WrongAnswerText2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WrongAnswerId3" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WrongAnswerText3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WrongAnswerId4" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WrongAnswerText4" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetQuestionStatistics">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetQuestionStatisticsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQuestionStatisticsResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetQuestionData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetQuestionDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQuestionDataResult" type="tns:ArrayOfQuestionDataInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfQuestionDataInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QuestionDataInfo" nillable="true" type="tns:QuestionDataInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QuestionDataInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SubjectName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuestionText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AnswerText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountAsked" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountRight" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LevelKnown" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnswerId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubjectId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="questionId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="answerId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="subjectId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="questionText" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="answerText" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countAsked" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="countRight" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="levelKnown" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDataResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddSubjectSoapIn">
+    <wsdl:part name="parameters" element="tns:AddSubject" />
+  </wsdl:message>
+  <wsdl:message name="AddSubjectSoapOut">
+    <wsdl:part name="parameters" element="tns:AddSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubjects" />
+  </wsdl:message>
+  <wsdl:message name="GetSubjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddQuestionSoapIn">
+    <wsdl:part name="parameters" element="tns:AddQuestion" />
+  </wsdl:message>
+  <wsdl:message name="AddQuestionSoapOut">
+    <wsdl:part name="parameters" element="tns:AddQuestionResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAnswerSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAnswer" />
+  </wsdl:message>
+  <wsdl:message name="AddAnswerSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="RightAnswerSubmitedSoapIn">
+    <wsdl:part name="parameters" element="tns:RightAnswerSubmited" />
+  </wsdl:message>
+  <wsdl:message name="RightAnswerSubmitedSoapOut">
+    <wsdl:part name="parameters" element="tns:RightAnswerSubmitedResponse" />
+  </wsdl:message>
+  <wsdl:message name="WrongAnswerSubmitedSoapIn">
+    <wsdl:part name="parameters" element="tns:WrongAnswerSubmited" />
+  </wsdl:message>
+  <wsdl:message name="WrongAnswerSubmitedSoapOut">
+    <wsdl:part name="parameters" element="tns:WrongAnswerSubmitedResponse" />
+  </wsdl:message>
+  <wsdl:message name="AnswerShownSoapIn">
+    <wsdl:part name="parameters" element="tns:AnswerShown" />
+  </wsdl:message>
+  <wsdl:message name="AnswerShownSoapOut">
+    <wsdl:part name="parameters" element="tns:AnswerShownResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRandomQuestionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRandomQuestion" />
+  </wsdl:message>
+  <wsdl:message name="GetRandomQuestionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRandomQuestionResponse" />
+  </wsdl:message>
+  <wsdl:message name="RightAnswerSoapIn">
+    <wsdl:part name="parameters" element="tns:RightAnswer" />
+  </wsdl:message>
+  <wsdl:message name="RightAnswerSoapOut">
+    <wsdl:part name="parameters" element="tns:RightAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRandomWrongAnswersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRandomWrongAnswers" />
+  </wsdl:message>
+  <wsdl:message name="GetRandomWrongAnswersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRandomWrongAnswersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionStatisticsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQuestionStatistics" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionStatisticsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQuestionStatisticsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQuestionData" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQuestionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDataSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateData" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDataSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="AddSubject">
+      <wsdl:input message="tns:AddSubjectSoapIn" />
+      <wsdl:output message="tns:AddSubjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjects">
+      <wsdl:input message="tns:GetSubjectsSoapIn" />
+      <wsdl:output message="tns:GetSubjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddQuestion">
+      <wsdl:input message="tns:AddQuestionSoapIn" />
+      <wsdl:output message="tns:AddQuestionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnswer">
+      <wsdl:input message="tns:AddAnswerSoapIn" />
+      <wsdl:output message="tns:AddAnswerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswerSubmited">
+      <wsdl:input message="tns:RightAnswerSubmitedSoapIn" />
+      <wsdl:output message="tns:RightAnswerSubmitedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WrongAnswerSubmited">
+      <wsdl:input message="tns:WrongAnswerSubmitedSoapIn" />
+      <wsdl:output message="tns:WrongAnswerSubmitedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AnswerShown">
+      <wsdl:input message="tns:AnswerShownSoapIn" />
+      <wsdl:output message="tns:AnswerShownSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomQuestion">
+      <wsdl:input message="tns:GetRandomQuestionSoapIn" />
+      <wsdl:output message="tns:GetRandomQuestionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswer">
+      <wsdl:input message="tns:RightAnswerSoapIn" />
+      <wsdl:output message="tns:RightAnswerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomWrongAnswers">
+      <wsdl:input message="tns:GetRandomWrongAnswersSoapIn" />
+      <wsdl:output message="tns:GetRandomWrongAnswersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionStatistics">
+      <wsdl:input message="tns:GetQuestionStatisticsSoapIn" />
+      <wsdl:output message="tns:GetQuestionStatisticsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionData">
+      <wsdl:input message="tns:GetQuestionDataSoapIn" />
+      <wsdl:output message="tns:GetQuestionDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <wsdl:input message="tns:UpdateDataSoapIn" />
+      <wsdl:output message="tns:UpdateDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddSubject">
+      <soap:operation soapAction="http://tempuri.org/AddSubject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjects">
+      <soap:operation soapAction="http://tempuri.org/GetSubjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddQuestion">
+      <soap:operation soapAction="http://tempuri.org/AddQuestion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnswer">
+      <soap:operation soapAction="http://tempuri.org/AddAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswerSubmited">
+      <soap:operation soapAction="http://tempuri.org/RightAnswerSubmited" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WrongAnswerSubmited">
+      <soap:operation soapAction="http://tempuri.org/WrongAnswerSubmited" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnswerShown">
+      <soap:operation soapAction="http://tempuri.org/AnswerShown" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomQuestion">
+      <soap:operation soapAction="http://tempuri.org/GetRandomQuestion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswer">
+      <soap:operation soapAction="http://tempuri.org/RightAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomWrongAnswers">
+      <soap:operation soapAction="http://tempuri.org/GetRandomWrongAnswers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionStatistics">
+      <soap:operation soapAction="http://tempuri.org/GetQuestionStatistics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionData">
+      <soap:operation soapAction="http://tempuri.org/GetQuestionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <soap:operation soapAction="http://tempuri.org/UpdateData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddSubject">
+      <soap12:operation soapAction="http://tempuri.org/AddSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubjects">
+      <soap12:operation soapAction="http://tempuri.org/GetSubjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddQuestion">
+      <soap12:operation soapAction="http://tempuri.org/AddQuestion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnswer">
+      <soap12:operation soapAction="http://tempuri.org/AddAnswer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswerSubmited">
+      <soap12:operation soapAction="http://tempuri.org/RightAnswerSubmited" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WrongAnswerSubmited">
+      <soap12:operation soapAction="http://tempuri.org/WrongAnswerSubmited" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AnswerShown">
+      <soap12:operation soapAction="http://tempuri.org/AnswerShown" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomQuestion">
+      <soap12:operation soapAction="http://tempuri.org/GetRandomQuestion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RightAnswer">
+      <soap12:operation soapAction="http://tempuri.org/RightAnswer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRandomWrongAnswers">
+      <soap12:operation soapAction="http://tempuri.org/GetRandomWrongAnswers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionStatistics">
+      <soap12:operation soapAction="http://tempuri.org/GetQuestionStatistics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionData">
+      <soap12:operation soapAction="http://tempuri.org/GetQuestionData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <soap12:operation soapAction="http://tempuri.org/UpdateData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="http://localhost:63816/WebService1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="http://localhost:63816/WebService1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
